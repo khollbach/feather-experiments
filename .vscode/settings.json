@@ -1,0 +1,5 @@
+{
+    // Don't try to build `test` target.
+    // https://github.com/rust-lang/vscode-rust/issues/729
+    "rust-analyzer.cargo.allTargets": false
+}
