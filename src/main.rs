@@ -25,7 +25,7 @@ fn main() -> ! {
             led_off(1, 10);
         }
 
-        busy_wait(1_000_000);
+        busy_wait(10_000_000);
 
         state ^= true;
     }
