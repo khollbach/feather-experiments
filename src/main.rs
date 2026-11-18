@@ -8,7 +8,6 @@ use panic_probe as _;
 #[cortex_m_rt::entry]
 fn main() -> ! {
     defmt::println!("hi");
-    defmt::panic!("bye");
 
     // Got these values from `src/boards/feather_nrf52840_express/board.h` in
     // https://github.com/adafruit/Adafruit_nRF52_Bootloader
