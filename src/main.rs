@@ -2,30 +2,12 @@
 #![no_main]
 
 use cortex_m::asm;
+use defmt_rtt as _;
 use panic_halt as _;
-
-/*
-
-Currently getting onto the board with:
-
-cargo build --release
-rust-objcopy -O binary target/thumbv7em-none-eabihf/release/feather-experiments flash.bin
-../uf2/utils/uf2conv.py target/flash.bin -c -b 0x26000 -f 0xADA52840 -o target/flash.uf2
-cp target/flash.uf2 /run/media/kevan/FTHR840BOOT/
-
-(also requires pressing a button on the board to get into the bootloader,
- and mounting the 'usb drive' in the 'Files' app)
-
-TODO: maybe automate the process a bit more
-- ~~how?~~ seems like the high-tech way of doing this involves a 'debug probe' device
-
-*/
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    // Go into bootloader on next warm reset.
-    // See `main.c` in https://github.com/adafruit/Adafruit_nRF52_Bootloader
-    write(0x2000_7F7C, 0x5A1AD5); // SALADS
+    defmt::println!("hi");
 
     // Got these values from `src/boards/feather_nrf52840_express/board.h` in
     // https://github.com/adafruit/Adafruit_nRF52_Bootloader
@@ -43,7 +25,7 @@ fn main() -> ! {
             led_off(1, 10);
         }
 
-        busy_wait(10_000_000);
+        busy_wait(1_000_000);
 
         state ^= true;
     }
