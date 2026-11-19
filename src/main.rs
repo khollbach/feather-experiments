@@ -5,6 +5,12 @@ use cortex_m::asm;
 use defmt_rtt as _;
 use panic_probe as _;
 
+/// https://defmt.ferrous-systems.com/panic#defmtpanic_handler
+#[defmt::panic_handler]
+fn abort() -> ! {
+    cortex_m::asm::udf();
+}
+
 #[cortex_m_rt::entry]
 fn main() -> ! {
     defmt::println!("hi");
